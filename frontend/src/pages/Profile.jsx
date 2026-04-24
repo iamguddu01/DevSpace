@@ -5,6 +5,8 @@ import { authFetch } from '../utils/auth';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 function Profile() {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
@@ -207,7 +209,7 @@ function Profile() {
             <Card.Body className="text-center p-4">
               <div className="mb-3">
                 {profile.profile_picture ? (
-                  <Image src={profile.profile_picture.startsWith('http') ? profile.profile_picture : `http://localhost:8000${profile.profile_picture}`} roundedCircle style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
+                  <Image src={profile.profile_picture.startsWith('http') ? profile.profile_picture : `${API_BASE_URL}${profile.profile_picture}`} roundedCircle style={{ width: '120px', height: '120px', objectFit: 'cover' }} />
                 ) : (
                   <div className="d-inline-flex justify-content-center align-items-center bg-secondary text-white rounded-circle" style={{ width: '120px', height: '120px', fontSize: '3rem' }}>
                     {profile.username.charAt(0).toUpperCase()}
@@ -266,7 +268,7 @@ function Profile() {
                     <div className="d-flex align-items-center">
                       <Link to={`/profile/${post.username}`} className="text-decoration-none">
                         {post.author_profile_picture ? (
-                          <Image src={post.author_profile_picture.startsWith('http') ? post.author_profile_picture : `http://localhost:8000${post.author_profile_picture}`} roundedCircle style={{ width: '45px', height: '45px', objectFit: 'cover' }} className="me-3 shadow-sm" />
+                          <Image src={post.author_profile_picture.startsWith('http') ? post.author_profile_picture : `${API_BASE_URL}${post.author_profile_picture}`} roundedCircle style={{ width: '45px', height: '45px', objectFit: 'cover' }} className="me-3 shadow-sm" />
                         ) : (
                           <div className="d-inline-flex justify-content-center align-items-center bg-secondary text-white rounded-circle me-3 shadow-sm" style={{ width: '45px', height: '45px', fontSize: '1.2rem' }}>
                             {post.username.charAt(0).toUpperCase()}
@@ -315,7 +317,7 @@ function Profile() {
                     {post.post_type === 'MEDIA' && post.image && (
                       <div className="text-center bg-body-tertiary rounded overflow-hidden">
                         <img
-                          src={post.image.startsWith('http') ? post.image : `http://localhost:8000${post.image}`}
+                          src={post.image.startsWith('http') ? post.image : `${API_BASE_URL}${post.image}`}
                           alt="Post Content"
                           className="img-fluid"
                           style={{ maxHeight: '500px', objectFit: 'contain' }}

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Card } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -39,7 +41,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:8000/register/', {
+            const response = await fetch(`${API_BASE_URL}/register/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

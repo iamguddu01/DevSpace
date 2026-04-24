@@ -3,6 +3,8 @@ import { Form, Button, Container, Row, Col, Alert, Card } from 'react-bootstrap'
 import { useNavigate, Link } from 'react-router-dom';
 import { saveToken } from '../utils/auth';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 const Login = () => {
     const [username, setUsername] =  useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +19,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:8000/login/', {
+            const response = await fetch(`${API_BASE_URL}/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

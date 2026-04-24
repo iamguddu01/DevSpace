@@ -10,7 +10,7 @@ export const removeToken = () => {
     localStorage.removeItem('accessToken');
 };
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export const authFetch = async (endpoint, options = {}) => {
     let token = getToken();
